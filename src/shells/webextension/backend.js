@@ -10,7 +10,7 @@ import debugConnection from '../../utils/debugConnection';
 
 const backendId = Math.random().toString(32).slice(2);
 
-function handshake(hook, contentScriptId) {
+function handshake(hook, storeHook, contentScriptId) {
   let listeners = [];
 
   const bridge = new Bridge({
@@ -42,7 +42,7 @@ function handshake(hook, contentScriptId) {
     },
   });
 
-  const disposeBackend = initBackend(bridge, hook);
+  const disposeBackend = initBackend(bridge, hook, storeHook);
 
   bridge.once('disconnect', () => {
     debugConnection('[contentScript -x BACKEND]');
@@ -93,8 +93,17 @@ function waitForPing() {
           debugConnection('[contentScript -> BACKEND]', e);
           window.removeEventListener('message', helloListener);
           window.removeEventListener('message', failListener);
+
+          // demo
           // eslint-disable-next-line no-underscore-dangle
-          handshake(window.__MOBX_DEVTOOLS_GLOBAL_HOOK__, contentScriptId);
+          window.__MOBX_DEVTOOLS_GLOBAL_STORES_HOOK__ = {
+            stores: { 
+              storeA: { a: '1' },
+              storeB: { b: '2' },
+            }
+          }
+          // eslint-disable-next-line no-underscore-dangle
+          handshake(window.__MOBX_DEVTOOLS_GLOBAL_HOOK__, window.__MOBX_DEVTOOLS_GLOBAL_STORES_HOOK__, contentScriptId);
         }
       };
 

@@ -60,8 +60,9 @@ export default class App extends React.PureComponent {
 
         this.setState({ connected: true });
         bridge.send('get-capabilities');
+        bridge.send('request-stores');
       });
-
+      
       if (!this.$unMounted) {
         this.setState({ loaded: true });
       }

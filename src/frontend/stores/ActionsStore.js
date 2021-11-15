@@ -45,6 +45,10 @@ export default class ActionsStore extends AbstractStore {
         // if (__DEV__) console.log(`inspected--${path.join('/')}`, data);
         this.emit(`inspected--${path.join('/')}`);
       }),
+      // demo
+      bridge.sub('update-stores', stores => {
+        console.log({ stores });
+      }),
     );
 
     preferences.get('logEnabled').then(({ logEnabled }) => {
