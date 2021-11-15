@@ -4,7 +4,7 @@ import initMobxReactNodesTreeBackend from './mobxReactNodesTree';
 import initMobxReactUpdatesHighlighter from './mobxReactUpdatesHighlighter';
 import initMobxLogBackend from './mobxLog';
 
-export default (bridge, hook) => {
+export default (bridge, hook, storeHook) => {
   if (!hook) {
     if (__DEV__) {
       throw new Error('');
