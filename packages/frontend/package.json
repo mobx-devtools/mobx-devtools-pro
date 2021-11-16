@@ -9,6 +9,7 @@
   },
   "license": "MIT",
   "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack --watch",
     "build": "cross-env NODE_ENV=development webpack"
   },
   "dependencies": {
