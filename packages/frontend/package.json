@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack"
+    "build": "cross-env NODE_ENV=development webpack"
   },
   "dependencies": {
     "react": "^17.0.2"
