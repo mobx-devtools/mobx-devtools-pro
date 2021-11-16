@@ -10,7 +10,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack --watch",
-    "build": "cross-env NODE_ENV=development webpack"
+    "build": "cross-env NODE_ENV=development webpack",
+    "lint": "eslint '**/*.@([jt]s?(x)|json)'",
+    "lint:fix": "eslint --fix '**/*.@([jt]s?(x)|json)'"
   },
   "dependencies": {
     "aphrodite": "^2.4.0",
