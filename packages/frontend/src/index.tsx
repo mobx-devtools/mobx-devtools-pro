@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {App} from './App';
+import { App } from './App';
 
-export default (config) => {
+export default config => {
   console.log(1);
   const reload = () => {
     ReactDOM.unmountComponentAtNode(config.node);
@@ -15,14 +15,7 @@ export default (config) => {
   };
 
   const render = () => {
-    ReactDOM.render(
-      <App
-        {...config}
-        reload={reload}
-      >
-      </App>,
-      config.node,
-    );
+    ReactDOM.render(<App {...config} reload={reload}></App>, config.node);
   };
 
   render();
