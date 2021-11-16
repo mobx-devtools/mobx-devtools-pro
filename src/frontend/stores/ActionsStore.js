@@ -45,9 +45,11 @@ export default class ActionsStore extends AbstractStore {
         // if (__DEV__) console.log(`inspected--${path.join('/')}`, data);
         this.emit(`inspected--${path.join('/')}`);
       }),
-      // demo
+      // TODO
       bridge.sub('update-stores', stores => {
-        console.log({ stores });
+        // eslint-disable-next-line no-console
+        console.log('update-stores:', stores);
+        this.stores = stores;
       }),
     );
 

@@ -90,10 +90,6 @@ export default bridge => {
       const value = path.reduce((acc, next) => acc && acc[next], change);
       storaTempValueInGlobalScope(value);
     }),
-    // demo
-    bridge.sub('request-stores', () => {
-      bridge.send('update-stores', {a: 1, b:2});
-    })
   ];
 
   return {

@@ -42,6 +42,9 @@ export default class App extends React.PureComponent {
       this.$disposables.push(
         bridge.sub('capabilities', ({ mobxFound }) => {
           this.setState({ mobxFound });
+          // TODO
+          // When the mobx has found, and then request stores
+          bridge.send('request-stores');
         }),
         bridge.sub('content-script-installation-error', () => {
           this.setState({ contentScriptInstallationError: true });
@@ -60,9 +63,8 @@ export default class App extends React.PureComponent {
 
         this.setState({ connected: true });
         bridge.send('get-capabilities');
-        bridge.send('request-stores');
       });
-      
+
       if (!this.$unMounted) {
         this.setState({ loaded: true });
       }
