@@ -94,14 +94,6 @@ function waitForPing() {
           window.removeEventListener('message', helloListener);
           window.removeEventListener('message', failListener);
 
-          // demo
-          // eslint-disable-next-line no-underscore-dangle
-          window.__MOBX_DEVTOOLS_GLOBAL_STORES_HOOK__ = {
-            stores: { 
-              storeA: { a: '1' },
-              storeB: { b: '2' },
-            }
-          }
           // eslint-disable-next-line no-underscore-dangle
           handshake(window.__MOBX_DEVTOOLS_GLOBAL_HOOK__, contentScriptId);
         }
