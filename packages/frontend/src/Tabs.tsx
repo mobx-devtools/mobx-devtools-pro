@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { css, StyleSheet } from 'aphrodite';
 import classNames from 'classnames';
+import { StoresTree } from './StoresTree';
 
 export const Tabs = () => {
   const [tab, setTab] = useState('Action');
@@ -44,7 +45,7 @@ export const Tabs = () => {
             [css(styles.hide)]: tab !== 'State',
           })}
         >
-          State
+          <StoresTree></StoresTree>
         </div>
       </div>
     </div>
@@ -84,7 +85,9 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   actionBody: {},
-  stateBody: {},
+  stateBody: {
+    padding: 16,
+  },
   hide: {
     display: 'none',
   },
