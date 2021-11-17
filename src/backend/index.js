@@ -5,7 +5,7 @@ import initMobxReactUpdatesHighlighter from './mobxReactUpdatesHighlighter';
 import initMobxLogBackend from './mobxLog';
 import initMobxStoresBackend from './mobxStores';
 
-export default (bridge, hook, storeHook) => {
+export default (bridge, hook) => {
   if (!hook) {
     if (__DEV__) {
       throw new Error('');
