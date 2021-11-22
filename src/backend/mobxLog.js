@@ -1,5 +1,6 @@
 import { format } from 'date-fns';
 import { cloneDeep } from 'lodash';
+import stringify from 'json-stringify-safe';
 import makeChangesProcessor from '../utils/changesProcessor';
 import consoleLogChange from './utils/consoleLogChange';
 import makeInspector from './utils/inspector';
@@ -10,7 +11,7 @@ const getStoreDataFromChangeObj = obj => {
   let storeData = {};
   if (obj) {
     try {
-      storeData = JSON.parse(JSON.stringify(cloneDeep(obj)));
+      storeData = JSON.parse(stringify(cloneDeep(obj)));
     } catch (err) {
       storeData = { error: err.message };
     }
