@@ -34,7 +34,7 @@ const summary = change => {
   sum.removedCount = change.removedCount;
   sum.object = change.object;
   // the newly added
-  sum.storeName = change.object.constructor && change.object.constructor.name;
+  sum.storeName = change && change.object && change.object.constructor && change.object.constructor.name;
   sum.actionName = change.name;
   sum.time = format(new Date(change.timestamp), 'HH:mm:ss');
   sum.storeData = getStoreDataFromChangeObj(change.object);
