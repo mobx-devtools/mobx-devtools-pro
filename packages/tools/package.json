@@ -16,7 +16,7 @@
     "url": "git+https://github.com/mobx-devtools/mobx-devtools.git/"
   },
   "author": "xichuan.liu@compass.com",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@rollup/plugin-typescript": "^8.3.0",
