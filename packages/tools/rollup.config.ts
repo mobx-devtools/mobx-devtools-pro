@@ -1,4 +1,4 @@
-import ts from 'rollup-plugin-typescript';
+import ts from 'rollup-plugin-typescript2';
 import typescript from 'typescript';
 import { uglify } from 'rollup-plugin-uglify';
 
