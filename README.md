@@ -11,7 +11,7 @@ This repository is home for:
 | Features                                                 | MobX Devtools Pro | MobX Devtool |
 | -------------------------------------------------------- | ----------------- | ------------ |
 | Track action                                             | ✅                | ✅           |
-| computed view                                            | ✅                | ❌           |
+| Computed view                                            | ✅                | ❌           |
 | App stores view                                          | ✅                | ❌           |
 | [MST](https://github.com/mobxjs/mobx-state-tree) support | ❌                | ✅           |
 
