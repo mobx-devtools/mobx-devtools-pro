@@ -16,7 +16,8 @@ export type ActionListProps = {
 };
 
 const getComponentReactionName = (name: string) => {
-  return name.replace(/^observer/, '') + ' render';
+  const componentName = name.replace(/^observer/, '') || '<anonymous>';
+  return componentName + ' render';
 }
 
 const ActionListBase = (props: ActionListProps) => {
