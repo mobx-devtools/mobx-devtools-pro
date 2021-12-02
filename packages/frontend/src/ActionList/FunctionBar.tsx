@@ -76,13 +76,12 @@ const ToggleLog = styled.div<{ enable?: boolean }>`
   box-sizing: content-box;
   width: 14px;
   height: 14px;
-  outline: 2px solid ${GREY_FILL};
   border-radius: 7px;
   background-color: ${GREY_FILL};
   ${({ enable }) =>
     enable
       ? `
-  outline-color: rgba(235, 104, 26, 0.2);
+  outline: 2px solid rgba(235, 104, 26, 0.2);
   background-color: ${PRIMARY_FONT_COLOR};`
       : ''};
 `;
