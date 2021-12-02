@@ -31,7 +31,7 @@ const FunctionBarBase = (props: FunctionBarProps) => {
       <ClearLog alt="Clear all logs" onClick={() => actionsLoggerStore.clearLog()}>
         {ClearLogo}
       </ClearLog>
-      <VerticalDivider />
+      {/* <VerticalDivider />
       <ActionPill
         isActive={actionsLoggerStore.logTypes.has('Action')}
         onClick={() => actionsLoggerStore.toggleLogTypes('Action')}
@@ -43,7 +43,7 @@ const FunctionBarBase = (props: FunctionBarProps) => {
         onClick={() => actionsLoggerStore.toggleLogTypes('Reaction')}
       >
         Observer
-      </ObserverPill>
+      </ObserverPill> */}
     </FunctionBarContainer>
   );
 };
@@ -78,6 +78,8 @@ const ToggleLog = styled.div<{ enable?: boolean }>`
   height: 14px;
   border-radius: 7px;
   background-color: ${GREY_FILL};
+  cursor: pointer;
+
   ${({ enable }) =>
     enable
       ? `
