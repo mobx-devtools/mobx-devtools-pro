@@ -16,11 +16,6 @@ export type ActionListProps = {
   actionsLoggerStore: ActionsLoggerStore;
 };
 
-const getComponentReactionName = (name: string) => {
-  const componentName = name.replace(/^observer/, '') || '<anonymous>';
-  return componentName + ' render';
-};
-
 const ActionListBase = (props: ActionListProps) => {
   const { actionsLoggerStore } = props;
   const [keyword, setKeyword] = useState<string>('');
@@ -29,7 +24,10 @@ const ActionListBase = (props: ActionListProps) => {
 
   const filteredList = useMemo(() => {
     return list
-      .filter(item => !keyword || item.name.includes(keyword))
+      .filter(
+        item =>
+          !keyword || item.actionName?.includes(keyword) || item.reactionName?.includes(keyword),
+      )
       .filter(item => actionsLoggerStore.logTypes.has(item.type));
   }, [keyword, list, actionsLoggerStore.logTypes]);
 
@@ -45,12 +43,12 @@ const ActionListBase = (props: ActionListProps) => {
       <FilterAction keyword={keyword} setKeyword={setKeyword} />
       <FunctionBar />
       <ActionsContainer>
-        {filteredList.map(({ id, actionName, name, time, type }) => (
+        {filteredList.map(({ id, actionName, reactionName, time, type }) => (
           <ListItem
             key={id}
             id={id}
             type={type}
-            name={type === 'action' ? actionName : getComponentReactionName(name)}
+            name={type === 'action' ? actionName : reactionName}
             time={time}
             selected={actionsLoggerStore.selectedActionId === id}
             onSelected={onActionItemSelected}
