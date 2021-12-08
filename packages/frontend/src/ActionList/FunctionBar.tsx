@@ -25,7 +25,7 @@ const FunctionBarBase = (props: FunctionBarProps) => {
     <FunctionBarContainer>
       <ToggleLog
         enable={actionsLoggerStore.logEnabled}
-        title="Stop recording logs"
+        title={`${actionsLoggerStore.logEnabled ? 'Stop' : 'Start'} recording logs`}
         onClick={() => actionsLoggerStore.toggleLogging()}
       ></ToggleLog>
       <ClearLog title="Clear all logs" onClick={() => actionsLoggerStore.clearLog()}>
