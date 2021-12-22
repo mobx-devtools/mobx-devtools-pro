@@ -5,7 +5,7 @@ import preferences from './preferences';
 import { RootStore } from '.';
 
 type ActionType = 'action' | 'reaction';
-const ActionsArray: ActionType[] = ['action', 'reaction'];
+const actionsArray: ActionType[] = ['action', 'reaction'];
 
 const PLACEHOLDER = 'placeholder';
 
@@ -56,6 +56,10 @@ export default class ActionsStore {
 
   logEnabled = true;
 
+  caseEnable = false;
+
+  regexEnable = false;
+
   consoleLogEnabled = false;
 
   logFilter?: string = undefined;
@@ -70,7 +74,7 @@ export default class ActionsStore {
 
   contextMenu: any = {};
 
-  logTypes: Set<ActionType> = new Set(ActionsArray);
+  logTypes: Set<ActionType> = new Set(actionsArray);
 
   diffById = {};
 
@@ -82,8 +86,11 @@ export default class ActionsStore {
     this.rootStore = rootStore;
     makeAutoObservable(this);
 
-    preferences.get('logEnabled').then(({ logEnabled }) => {
-      if (logEnabled) this.toggleLogging(true);
+    preferences.get('logEnabled', 'logTypes', 'caseEnable', 'regexEnable').then(({logEnabled, logTypes, caseEnable, regexEnable}: any) => {
+      this.toggleLogging(!!logEnabled);
+      this.setLogTypes(Array.isArray(logTypes) ? logTypes : actionsArray);
+      this.setCaseEnable(!!caseEnable);
+      this.setRegexEnable(!!regexEnable);
     });
   }
 
@@ -130,9 +137,9 @@ export default class ActionsStore {
   }
 
   toggleLogging(logEnabled = !this.logEnabled) {
-    preferences.set({ logEnabled });
     this.bridge?.send('set-log-enabled', logEnabled);
     this.logEnabled = logEnabled;
+    preferences.set({ logEnabled });
   }
 
   toggleConsoleLogging(consoleLogEnabled = !this.consoleLogEnabled) {
@@ -165,6 +172,11 @@ export default class ActionsStore {
     } else {
       this.logTypes.add(logType);
     }
+    preferences.set({ logTypes: Array.from(this.logTypes) });
+  }
+
+  setLogTypes(logTypes: ActionType[]) {
+    this.logTypes = new Set(logTypes);
   }
 
   showContextMenu(type, evt, ...args) {
@@ -225,5 +237,15 @@ export default class ActionsStore {
 
   selectAction(id: string) {
     this.selectedActionId = id;
+  }
+
+  setCaseEnable = (caseEnable: boolean) => {
+    this.caseEnable = caseEnable;
+    preferences.set({caseEnable});
+  }
+
+  setRegexEnable = (regexEnable: boolean) => {
+    this.regexEnable = regexEnable;
+    preferences.set({regexEnable});
   }
 }
