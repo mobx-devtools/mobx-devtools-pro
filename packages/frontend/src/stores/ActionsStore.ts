@@ -54,7 +54,7 @@ const getDiffData = (prevStores, currentStores, storeName) => {
 export default class ActionsStore {
   rootStore: RootStore;
 
-  logEnabled = true;
+  logEnabled = false;
 
   caseEnable = false;
 
@@ -85,7 +85,9 @@ export default class ActionsStore {
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
     makeAutoObservable(this);
-
+  }
+  
+  getPreferences() {
     preferences.get('logEnabled', 'logTypes', 'caseEnable', 'regexEnable').then(({logEnabled, logTypes, caseEnable, regexEnable}: any) => {
       this.toggleLogging(!!logEnabled);
       this.setLogTypes(Array.isArray(logTypes) ? logTypes : actionsArray);
@@ -98,6 +100,9 @@ export default class ActionsStore {
     this.bridge?.sub(
       'appended-log-item',
       ({ change, diffData }) => {
+        if (!this.logEnabled) {
+          return;
+        }
         if (this.logItemsIds.length > 5000) {
           const removedIds = this.logItemsIds.splice(0, this.logItemsIds.length - 4900);
           removedIds.forEach(id => {
