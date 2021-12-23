@@ -131,22 +131,6 @@ export default bridge => {
     bridge.sub('remove-all-log-items', () => {
       itemsById = {};
     }),
-    bridge.sub('inspect-change', ({ changeId, path }) => {
-      if (!inspector.inspectedObject || changeId !== inspector.inspectedObject.id) {
-        inspector.setInspectedObject(itemsById[changeId]);
-      }
-      inspector.inspect(path);
-    }),
-    bridge.sub('stop-inspecting-change', ({ changeId, path }) => {
-      if (inspector.inspectedObject && changeId === inspector.inspectedObject.id) {
-        inspector.forget(path);
-      }
-    }),
-    bridge.sub('log:makeGlobal', ({ changeId, path }) => {
-      const change = itemsById[changeId];
-      const value = path.reduce((acc, next) => acc && acc[next], change);
-      storaTempValueInGlobalScope(value);
-    }),
   ];
 
   return {
