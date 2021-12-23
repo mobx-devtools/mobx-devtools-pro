@@ -20,6 +20,7 @@ export default class CapabilitiesStore {
     this.subscribe();
     this.rootStore.storesStore.subscribe();
     this.rootStore.actionsLoggerStore.subscribe();
+    this.rootStore.actionsLoggerStore.getPreferences();
   }
 
   subscribe() {
