@@ -73,33 +73,12 @@ export default class ActionsStore {
         this.logItemsIds.push(change.id);
       },
     );
-    this.bridge?.sub('log-item-details', item => {
-      if (this.logItemsById[item.id]) {
-        Object.assign(this.logItemsById[item.id], item);
-      }
-    });
-    this.bridge?.sub('inspect-change-result', ({ changeId, path, data }) => {
-      const obj = path.reduce((acc, next) => acc && acc[next], this.logItemsById[changeId]);
-      if (obj) {
-        Object.assign(obj, data);
-      }
-      // if (__DEV__) console.log(`inspected--${path.join('/')}`, data);
-    });
   }
 
   toggleLogging(logEnabled = !this.logEnabled) {
     this.bridge?.send('set-log-enabled', logEnabled);
     this.logEnabled = logEnabled;
     preferences.set({ logEnabled });
-  }
-
-  toggleConsoleLogging(consoleLogEnabled = !this.consoleLogEnabled) {
-    this.bridge?.send('set-console-log-enabled', consoleLogEnabled);
-    this.consoleLogEnabled = consoleLogEnabled;
-  }
-
-  getDetails(id) {
-    this.bridge?.send('get-log-item-details', id);
   }
 
   clearLog() {
